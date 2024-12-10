@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "menopy"
+version = "0.0.1a2"
+authors = [
+  { name="Sven Kraus", email="alf@trash-mail.com" },
+]
+description = "A parser for Menota-XML files."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "lxml",
+    "beautifulsoup4",
+    "requests"
+]
+
+[project.urls]
+Homepage = "https://github.com/kraus-s/menopy"

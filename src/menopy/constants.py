@@ -1,0 +1,1 @@
+MENOTA_ENTITIES_URL = "http://www.menota.org/menota-entities.txt"
