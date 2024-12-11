@@ -2,9 +2,9 @@ from bs4 import BeautifulSoup
 import bs4
 import requests
 import re
-from menota_parser.constants import MENOTA_ENTITIES_URL
-from menota_parser.token import Token
-from menota_parser.menodoc import MeNoDoc
+from menopy.constants import MENOTA_ENTITIES_URL
+from menopy.token import Token
+from menopy.menodoc import MeNoDoc
 
 
 def download_and_parse_entities(url) -> dict[str, str]:
