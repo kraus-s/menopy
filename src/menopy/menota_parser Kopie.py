@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import bs4
 import requests
 import re
-from menota_parser.constants import MENOTA_ENTITIES_URL
+from menopy.constants import MENOTA_ENTITIES_URL
 
 
 class token:

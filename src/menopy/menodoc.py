@@ -1,4 +1,4 @@
-from menota_parser.token import Token
+from menopy.token import Token
 
 
 class MeNoDoc:
