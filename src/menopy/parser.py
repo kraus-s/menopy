@@ -1,68 +1,11 @@
 from bs4 import BeautifulSoup
 import bs4
-import requests
-import re
 from menopy.constants import MENOTA_ENTITIES_URL
 from menopy.token import Token
 from menopy.menodoc import MeNoDoc
-from menopy.load_menodoc import load_menoxml
+from menopy.load_menoxml import load_menoxml
+from menopy.head_extractor import extract_head
 
-def get_menota_info (soup: BeautifulSoup) -> MeNoDoc:
-    try:
-        ms_metadata = soup.find("sourcedesc")
-        shelfmark_ = ms_metadata.find('idno')
-        shelfmark = shelfmark_.get_text()
-        txt_name_raw = ms_metadata.find("msname")
-        txt_name = txt_name_raw.get_text()
-    except:
-        ms_metadata = soup.find("sourceDesc")
-        shelfmark_ = ms_metadata.find('idno')
-        shelfmark = shelfmark_.get_text()
-        txt_name_raw = ms_metadata.find("msName")
-        txt_name = txt_name_raw.get_text()
-    try:
-        levels = soup.find("normalization")
-        levels = levels["me:level"]
-        levels = levels.split()
-    except:
-        import pdb; pdb.set_trace()
-    if "dipl" in levels:
-        diplomatic = True
-    else:
-        diplomatic = False
-    if "norm" in levels:
-        normalized = True
-    else:
-        normalized = False
-    if "facs" in levels:
-        facsimile = True
-    else:
-        facsimile = False
-    interpretations = soup.find("interpretation")
-    if interpretations is not None:
-        if interpretations["me:lemmatized"] == "completely":
-            lemmatized = True
-        else:
-            lemmatized = False
-        if interpretations["me:morphAnalyzed"] == "completely":
-            msa = True
-        else:   
-            msa = False
-    else:
-        emroon = False
-        for string in soup.strings:
-            if "emroon" in string:
-                emroon = True
-        if emroon:
-            msa = True
-            lemmatized = True
-        else:
-            msa = False
-            lemmatized = False
-    
-    current_manuscript = MeNoDoc(name=txt_name, manuscript=shelfmark, lemmatized=lemmatized, diplomatic=diplomatic, normalized=normalized, facsimile=facsimile, msa=msa)
-
-    return current_manuscript
 
 
 def reg_menota_parse(current_manuscript: MeNoDoc, soup: bs4.BeautifulSoup, for_nlp: bool = True) -> MeNoDoc:
@@ -128,7 +71,7 @@ def reg_menota_parse(current_manuscript: MeNoDoc, soup: bs4.BeautifulSoup, for_n
 def parse(input_file: str) -> MeNoDoc:
     print("Parsing file...")
     soup = load_menoxml(input_file)
-    current_manuscript = get_menota_info(soup)
+    current_manuscript = extract_head(soup)
     current_manuscript = reg_menota_parse(soup=soup, current_manuscript=current_manuscript)
     return current_manuscript
 
