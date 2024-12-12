@@ -4,9 +4,9 @@ build-backend = "hatchling.build"
 
 [project]
 name = "menopy"
-version = "0.0.1a3"
+version = "0.0.1a6"
 authors = [
-  { name="Sven Kraus", email="alf@trash-mail.com" },
+  { name="Sven Kraus"},
 ]
 description = "A parser for Menota-XML files."
 readme = "README.md"
