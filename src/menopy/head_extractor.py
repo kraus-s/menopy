@@ -11,7 +11,8 @@ def get_shelfmark_and_txtname(soup: BeautifulSoup) -> tuple[str, str, str]:
         shelfmark = shelfmark_.get_text()
         txt_name_raw = ms_metadata.find("msname")
         txt_name = txt_name_raw.get_text()
-    except ValueError:
+    except AttributeError:
+        # TODO: Implement proper error handling, at least some logging
         ms_metadata = soup.find("sourceDesc")
         shelfmark_ = ms_metadata.find('idno')
         shelfmark = shelfmark_.get_text()
