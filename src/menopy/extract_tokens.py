@@ -1,13 +1,13 @@
 from menopy.menodoc import MeNoDoc
 from bs4 import BeautifulSoup
-from menopy.token import Token
+from menopy.menodoc import MenotaToken
 from menopy.constants import LEMMATIZATION_RESOLVER_DICT
 from menopy.constants import CLEANER_LIST
 from menopy.constants import CHARACTER_RESOLVER_DICT
 
 
-def clean_tokens(tokens: list[Token]) -> list[Token]:
-    res: list[Token] = []
+def clean_tokens(tokens: list[MenotaToken]) -> list[MenotaToken]:
+    res: list[MenotaToken] = []
     for tok in tokens:
         for k, v in LEMMATIZATION_RESOLVER_DICT.items():
                 if tok.lemma == k:
@@ -24,8 +24,8 @@ def clean_tokens(tokens: list[Token]) -> list[Token]:
     return res
 
 
-def extract_tokens(soup: BeautifulSoup) -> list[Token]:
-    res: list[Token] = []
+def extract_tokens(soup: BeautifulSoup) -> list[MenotaToken]:
+    res: list[MenotaToken] = []
     text_proper = soup.find_all('w')
     for word in text_proper:
         lemming = word.get('lemma', "N/A")
@@ -49,11 +49,11 @@ def extract_tokens(soup: BeautifulSoup) -> list[Token]:
             msa_clean = word.get('me:msa')
         else:
             msa_clean = "-"
-        res.append(Token(normalized=normalized_clean, diplomatic=diplomatic_clean, facsimile=facsimile_clean, lemma=lemming, msa=msa_clean))
+        res.append(MenotaToken(normalized=normalized_clean, diplomatic=diplomatic_clean, facsimile=facsimile_clean, lemma=lemming, msa=msa_clean))
     return res
 
 
-def token_extractor(soup: BeautifulSoup) -> list[Token]:
+def token_extractor(soup: BeautifulSoup) -> list[MenotaToken]:
     tokens = extract_tokens(soup)
     cleaned_tokens = clean_tokens(tokens)
     return cleaned_tokens
