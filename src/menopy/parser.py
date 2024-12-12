@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-import bs4
 from menopy.constants import MENOTA_ENTITIES_URL
 from menopy.menodoc import MeNoDoc
 from menopy.load_menoxml import load_menoxml
