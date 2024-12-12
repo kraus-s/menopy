@@ -65,7 +65,7 @@ Class used to handle the individual tokens. For the purpose of this script,
 anything that is inside a `<w>`-element is considered a token. For the exact 
 definition, refer to [Menota Handbook ch. 3 sec. 6](https://www.menota.org/HB3_ch3.xml#sec3.6)
 The MenotaToken class maps all the different properties, attributes and elements
-a `<w>`-element can have according to the Menota handbookt to properties of the class:
+a `<w>`-element can have according to the Menota handbook to properties of the class:
 
 ```
 normalized: str
